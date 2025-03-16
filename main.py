@@ -1,4 +1,5 @@
-#import the needed function(s) from stats.py
+#import the needed function(s) from stats.py and sys
+import sys
 from stats import get_num_words
 from stats import get_num_characters
 from stats import sort_char_count
@@ -23,14 +24,18 @@ def main():
 
     #print(total_characters_dict)
 
-    total_characters_dict = get_num_characters('books/frankenstein.txt')
+    if len(sys.argv)<2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    total_characters_dict = get_num_characters(sys.argv[1])
     sorted_chars = sort_char_count(total_characters_dict) 
     
      # Print the report
     print("============ BOOKBOT ============")
-    print("Analyzing book found at books/frankenstein.txt...")
+    print(f"Analyzing book found at {sys.argv[1]}...")
     print("----------- Word Count ----------")
-    print(f"Found {get_num_words('books/frankenstein.txt')} total words")
+    print(f"Found {get_num_words(sys.argv[1])} total words")
     print("--------- Character Count -------")
     
     # Print each character and its count
